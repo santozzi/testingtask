@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import taskRoute from './routes/task.routes';
 
 
 class Server {
@@ -20,7 +21,7 @@ class Server {
         this.app.use( cors());
     }
     routes(){
-        // this.app.use("/users",userRoute);
+         this.app.use("/tasks",taskRoute);
         // this.app.use( "/categories",categoryRoute);
         // this.app.use("/products",productRouote)
         // this.app.use("/restart",restartRoute);
