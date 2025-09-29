@@ -3,7 +3,7 @@ export class Task {
   constructor(
     
     protected tarea: string,
-    protected cumplido: boolean,
+    protected cumplida: boolean,
     protected id: string = ""
   ) {}
 
@@ -29,11 +29,11 @@ export class Task {
 
   // Getter y Setter para cumplstringa
   public isCumplido(): boolean {
-    return this.cumplido;
+    return this.cumplida;
   }
 
   public setCumplido(cumplido: boolean): void {
-    this.cumplido = cumplido;
+    this.cumplida = cumplido;
   }
 
 

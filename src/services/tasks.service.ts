@@ -3,25 +3,25 @@ import { Task } from "../models/task";
 import TaskModel from './../models/implementations/mockTask/mockTask'
 
 class TaskService implements TaskCrud{
-    getTasks(): Array<Task> {
+    getTasks(): Promise<Array<Task>> {
         return TaskModel.getTasks();
     }
-    getTask(id: string): Task {
+    getTask(id: string): Promise<Task> {
         return TaskModel.getTask(id);
     }
-    addTask(tarea: Task): void {
-       TaskModel.addTask(tarea);
+    addTask(tarea: Task): Promise<Task> {
+       return TaskModel.addTask(tarea);
     }
     deleteTask(id: string): void {
-        TaskModel.deleteTask(id);
+         TaskModel.deleteTask(id);
     }
-    editTaskName(id: string, tarea: string): Task {
+    editTaskName(id: string, tarea: string): Promise<Task> {
        return TaskModel.editTaskName(id,tarea);
     }
-    cumplirPostergar(id: string, cumplida: boolean): Task {
+    cumplirPostergar(id: string, cumplida: boolean): Promise<Task> {
         return TaskModel.cumplirPostergar(id,cumplida);
     }
-    editTask(id: string, tarea: string, cumplida: boolean): Task {
+    editTask(id: string, tarea: string, cumplida: boolean): Promise<Task> {
        return TaskModel.editTask(id,tarea,cumplida);
     }
     size(): number {
