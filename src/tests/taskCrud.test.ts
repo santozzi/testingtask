@@ -1,24 +1,60 @@
+import { Task } from "./../models/task";
+import TaskServices from "./../services/tasks.service";
+let tarea0:Task;
+beforeAll(() => {
+    tarea0 = new Task("tarea de prueba");
+  
+});
+let id:string;
+beforeEach(async()=>{
+    const tarea2 = new Task("tarea dummy");
+    const nuevaTarea = await TaskServices.addTask(tarea2)
+    id = nuevaTarea.getId();
+})
 
-// import {test,expect,describe} from 'vitest';
-// import { Task } from '../models/task';
-// import { TaskCrud } from '../models/interface/taskCrud.interface';
-// import { MockTask } from '../models/implementations/mockTask/mockTask';
+describe("servicios de las task", () => {
+  test("Ver tareas de la bd", async () => {
+    const tareas = await TaskServices.getTasks();
 
-// describe("prueba de taskCrud",()=>{
-//     const id = 1;
-//     const task:Task<number> = new Task(id,"ir al super",false);
-//     const crud:TaskCrud<number> = new MockTask();
-//     crud.addTask(task);
-//     test("addTask",()=>{
-        
-//         expect(crud.size()).toBe(1);
-//     })
+    expect(tareas.length).toBe(1);
+  });
+  
+  test("agregar una tarea", async () => {
+    const tareaAgregada = await TaskServices.addTask(tarea0);
+    const tareas = await TaskServices.getTasks();
+    expect(tareas.length).toBe(2);
+  });
 
-//     test("getTask",()=>{
-//         const task =  crud.getTask(id);
-//         expect(task.getId()).equals(1);
-//         expect(task.getTarea()).equals("ir al super")
-        
-//     })
-    
-// })
+  test("getTest",async ()=>{
+    const id = tarea0.getId();
+    const tareaEncontrada = await TaskServices.getTask(id);
+    expect(tareaEncontrada).toEqual(tarea0)
+  })
+  test("editar TaskName",async()=>{
+   const tareaTxt = "Ragar las plantas";
+   await  TaskServices.editTaskName(id,tareaTxt)
+   const tareaEditada = await TaskServices.getTask(id);
+   expect(tareaEditada.getTarea()).toBe(tareaTxt);
+  })
+
+
+});
+
+afterEach(()=>{
+      TaskServices.deleteTask(id)
+})
+
+describe("pruebas de la clase Task", () => {
+  //preparar lo que necesito
+  //Arrange
+  const tarea1 = new Task("Ir a correr");
+  //actuar
+  //Act
+  tarea1.setCumplido(true);
+  //probar la hipotesis
+  //Assert
+  //el patron de AAA
+  test("Cuando realizao la tearea debe dar true", () => {
+    expect(tarea1.isCumplido()).toBe(true);
+  });
+});
