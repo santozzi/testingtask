@@ -1,4 +1,4 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import cors from 'cors';
 import taskRoute from './routes/task.routes';
 
@@ -22,6 +22,9 @@ class Server {
     }
     routes(){
          this.app.use("/tasks",taskRoute);
+         this.app.get("/",(req:Request,res:Response)=>{
+            res.send("hola mundo!!")
+         })
         // this.app.use( "/categories",categoryRoute);
         // this.app.use("/products",productRouote)
         // this.app.use("/restart",restartRoute);

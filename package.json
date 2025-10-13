@@ -6,19 +6,23 @@
   "scripts": {
     "test": "npx jest --watch",
     "build": "npx tsc --watch",
-    "dev": "node --watch ./dist/index.js"
+    "dev": "node --watch ./dist/index.js",
+    "test:int": "npx jest --watch ./dist/tests/integrated.task.test.js"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "devDependencies": {
+    "@faker-js/faker": "^9.9.0",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
     "@types/jest": "^30.0.0",
     "@types/node": "^24.5.1",
+    "@types/supertest": "^6.0.3",
     "@vitest/ui": "^3.2.4",
     "jest": "^30.2.0",
+    "supertest": "^7.1.4",
     "typescript": "^5.9.2",
     "vitest": "^3.2.4"
   },

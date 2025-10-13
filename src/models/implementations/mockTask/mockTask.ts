@@ -1,5 +1,6 @@
 import { TaskCrud } from "../../interface/taskCrud.interface";
 import { Task } from "../../task";
+import { getOneTask } from "../../../tests/fake/tareas.fake";
 
 export class MockTask implements TaskCrud {
   protected tam: number;
@@ -9,6 +10,8 @@ export class MockTask implements TaskCrud {
     this.id=1;
     this.tam = 0;
     this.container = new Array<Task>();
+    // getOneTask().then((data)=>this.container.push(data))
+    
   }
   editTaskName(id: string, tarea: string): Promise<Task> {
     return new Promise<Task>((resolve, reject) => {
