@@ -1,60 +1,56 @@
-import { Task } from "./../models/task";
-import TaskServices from "./../services/tasks.service";
-let tarea0:Task;
+import { Task } from './../models/task';
+import TaskServices from './../services/tasks.service';
+let tarea0: Task;
 beforeAll(() => {
-    tarea0 = new Task("tarea de prueba");
-  
+  tarea0 = new Task('tarea de prueba');
 });
-let id:string;
-beforeEach(async()=>{
-    const tarea2 = new Task("tarea dummy");
-    const nuevaTarea = await TaskServices.addTask(tarea2)
-    id = nuevaTarea.getId();
-})
+let id: string;
+beforeEach(async () => {
+  const tarea2 = new Task('tarea dummy');
+  const nuevaTarea = await TaskServices.addTask(tarea2);
+  id = nuevaTarea.getId();
+});
 
-describe("servicios de las task", () => {
-  test("Ver tareas de la bd", async () => {
+describe('servicios de las task', () => {
+  test('Ver tareas de la bd', async () => {
     const tareas = await TaskServices.getTasks();
 
     expect(tareas.length).toBe(1);
   });
-  
-  test("agregar una tarea", async () => {
-    const tareaAgregada = await TaskServices.addTask(tarea0);
+
+  test('agregar una tarea', async () => {
     const tareas = await TaskServices.getTasks();
     expect(tareas.length).toBe(2);
   });
 
-  test("getTest",async ()=>{
+  test('getTest', async () => {
     const id = tarea0.getId();
     const tareaEncontrada = await TaskServices.getTask(id);
-    expect(tareaEncontrada).toEqual(tarea0)
-  })
-  test("editar TaskName",async()=>{
-   const tareaTxt = "Ragar las plantas";
-   await  TaskServices.editTaskName(id,tareaTxt)
-   const tareaEditada = await TaskServices.getTask(id);
-   expect(tareaEditada.getTarea()).toBe(tareaTxt);
-  })
-
-
+    expect(tareaEncontrada).toEqual(tarea0);
+  });
+  test('editar TaskName', async () => {
+    const tareaTxt = 'Ragar las plantas';
+    await TaskServices.editTaskName(id, tareaTxt);
+    const tareaEditada = await TaskServices.getTask(id);
+    expect(tareaEditada.getTarea()).toBe(tareaTxt);
+  });
 });
 
-afterEach(()=>{
-      TaskServices.deleteTask(id)
-})
+afterEach(() => {
+  TaskServices.deleteTask(id);
+});
 
-describe("pruebas de la clase Task", () => {
+describe('pruebas de la clase Task', () => {
   //preparar lo que necesito
   //Arrange
-  const tarea1 = new Task("Ir a correr");
+  const tarea1 = new Task('Ir a correr');
   //actuar
   //Act
   tarea1.setCumplido(true);
   //probar la hipotesis
   //Assert
   //el patron de AAA
-  test("Cuando realizao la tearea debe dar true", () => {
+  test('Cuando realizao la tearea debe dar true', () => {
     expect(tarea1.isCumplido()).toBe(true);
   });
 });

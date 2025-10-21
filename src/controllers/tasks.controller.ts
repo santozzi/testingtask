@@ -1,12 +1,12 @@
-import { Request, Response } from "express";
-import TasksService from "../services/tasks.service";
-import { Task } from "./../models/task";
+import { Request, Response } from 'express';
+import TasksService from '../services/tasks.service';
+import { Task } from './../models/task';
 class TasksController {
   public async getTask(req: Request, res: Response) {
     const id = req.params.id;
     if (!id) {
       res.status(402).json({
-        message: "id no definido",
+        message: 'id no definido',
       });
     } else {
       try {
@@ -34,15 +34,19 @@ class TasksController {
     const id = req.params.id;
     if (!id) {
       res.status(402).json({
-        message: "id no definido",
+        message: 'id no definido',
       });
     } else {
       try {
         TasksService.deleteTask(id);
-        res.status(200).json({ message: "Tarea eliminada" });
+        res.status(200).json({
+          message: 'Tarea eliminada',
+        });
       } catch (error) {
         if (error instanceof Error) {
-          res.status(404).json({ message: error });
+          res.status(404).json({
+            message: error,
+          });
         }
       }
     }
@@ -52,12 +56,12 @@ class TasksController {
     const name = req.body.name;
     if (!id) {
       res.status(402).json({
-        message: "id no definido",
+        message: 'id no definido',
       });
       //TODO: buscarcar el que me saca los espacios de los costados
       if (!name) {
         res.status(402).json({
-          message: "tarea incorrecta",
+          message: 'tarea incorrecta',
         });
       }
     } else {
@@ -66,7 +70,9 @@ class TasksController {
         res.status(200).json(tareaModifcada);
       } catch (error) {
         if (error instanceof Error)
-          res.status(404).json({ message: error.message });
+          res.status(404).json({
+            message: error.message,
+          });
       }
     }
   }
@@ -75,12 +81,12 @@ class TasksController {
     const cumplida = req.body.cumplida;
     if (!id) {
       res.status(402).json({
-        message: "id no definido",
+        message: 'id no definido',
       });
       //TODO: buscarcar el que me saca los espacios de los costados
       if (!cumplida) {
         res.status(402).json({
-          message: "tarea incorrecta",
+          message: 'tarea incorrecta',
         });
       }
     } else {
@@ -89,7 +95,9 @@ class TasksController {
         res.status(200).json(tareaModifcada);
       } catch (error) {
         if (error instanceof Error)
-          res.status(404).json({ message: error.message });
+          res.status(404).json({
+            message: error.message,
+          });
       }
     }
   }
@@ -97,24 +105,25 @@ class TasksController {
   public async editTask(req: Request, res: Response) {
     const id = req.params.id;
     const name = req.body.name;
-     const cumplida = req.body.cumplida;
+    const cumplida = req.body.cumplida;
     if (!id || !name || !cumplida) {
       res.status(402).json({
-        message: "error al ingreso de datos",
+        message: 'error al ingreso de datos',
       });
- 
     } else {
       try {
-        const tareaModifcada = await TasksService.editTask(id, name,cumplida);
+        const tareaModifcada = await TasksService.editTask(id, name, cumplida);
         res.status(200).json(tareaModifcada);
       } catch (error) {
         if (error instanceof Error)
-          res.status(404).json({ message: error.message });
+          res.status(404).json({
+            message: error.message,
+          });
       }
     }
   }
-   public size(req: Request, res: Response) {
-      res.status(200).json({size:TasksService.size()})
-   }
+  public size(req: Request, res: Response) {
+    res.status(200).json({ size: TasksService.size() });
+  }
 }
 export default new TasksController();

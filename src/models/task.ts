@@ -1,13 +1,9 @@
 export class Task {
-
   constructor(
-    
     protected tarea: string,
     protected cumplida: boolean = false,
-    protected id: string = ""
+    protected id: string = ''
   ) {}
-
-
 
   // Getter y Setter para string
   public getId(): string {
@@ -35,7 +31,4 @@ export class Task {
   public setCumplido(cumplido: boolean): void {
     this.cumplida = cumplido;
   }
-
-
-
 }
